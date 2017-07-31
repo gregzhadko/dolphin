@@ -24,23 +24,18 @@ namespace Timeline.ViewModel
         public MainViewModel()
         {
             BoxesInTimeline = new ObservableCollection<BaseBox>();
-
             NewBoxList = new RadObservableCollection<BaseBox> {NewNSRBox(), NewPVCBox(), NewPauseBox()};
-
-
             BoxesInTimeline.Add(NewNSRBox());
-
-
             NewBoxList.CollectionChanged += NewBoxListOnCollectionChanged;
         }
 
         /// <summary>
-        /// Collect all the boxes which were added to the timeline
+        ///     Collect all the boxes which were added to the timeline
         /// </summary>
         public ObservableCollection<BaseBox> BoxesInTimeline { get; set; }
 
         /// <summary>
-        /// Return total duration of boxes in the timeline
+        ///     Return total duration of boxes in the timeline
         /// </summary>
         public int TotalDuration
         {
@@ -48,17 +43,17 @@ namespace Timeline.ViewModel
         }
 
         /// <summary>
-        /// List of the boxes which can be added. For now it contains two boxes: Pause Box and NSR Box.
-        /// If any of the box is removed a new one will be created
+        ///     List of the boxes which can be added. For now it contains two boxes: Pause Box and NSR Box.
+        ///     If any of the box is removed a new one will be created
         /// </summary>
         public RadObservableCollection<BaseBox> NewBoxList
         {
-            get { return _newBoxList; }
-            set { Set(ref _newBoxList, value); }
+            get => _newBoxList;
+            set => Set(ref _newBoxList, value);
         }
 
         /// <summary>
-        /// Command which occurs when user click export command
+        ///     Command which occurs when user click export command
         /// </summary>
         public RelayCommand ExportCommand
         {
@@ -86,7 +81,7 @@ namespace Timeline.ViewModel
                 stream.WriteLine(256);
 
                 //write number of boxes following 256 line (totalEntries = TotalDuration of timeline * 256)
-                var totalEntries = TotalDuration*256;
+                var totalEntries = TotalDuration * 256;
                 stream.WriteLine(totalEntries);
 
                 var boxes = RemoveDoublePauseBoxes(BoxesInTimeline.ToList());
@@ -100,15 +95,10 @@ namespace Timeline.ViewModel
 
                 //Get points for Pause boxes. 
                 //Number of points depends on max point location of neighbor boxes 
-                for (int i = 0; i < boxes.Count; i++)
+                for (var i = 0; i < boxes.Count; i++)
                 {
                     var pauseBox = boxes[i] as PauseBox;
-
-                    if (pauseBox != null)
-                    {
-                        pauseBox.GeneratePoints(i > 0 ? (Box) boxes[i - 1] : null,
-                            i + 1 < boxes.Count ? (Box) boxes[i + 1] : null);
-                    }
+                    pauseBox?.GeneratePoints(i > 0 ? (Box) boxes[i - 1] : null, i + 1 < boxes.Count ? (Box) boxes[i + 1] : null);
                 }
 
                 stream.WriteLine(boxes.Count);
@@ -124,14 +114,14 @@ namespace Timeline.ViewModel
         }
 
         /// <summary>
-        /// Union pause boxes if they are located one after another in the list
+        ///     Union pause boxes if they are located one after another in the list
         /// </summary>
         /// <param name="boxes">Source list</param>
         /// <returns>Result list</returns>
         private static List<BaseBox> RemoveDoublePauseBoxes(IReadOnlyList<BaseBox> boxes)
         {
             var result = new List<BaseBox>();
-            for (int i = 0; i < boxes.Count; i++)
+            for (var i = 0; i < boxes.Count; i++)
             {
                 var box = boxes[i];
                 result.Add(box);
@@ -161,11 +151,11 @@ namespace Timeline.ViewModel
                         {
                             NewBoxList.Add(NewPauseBox());
                         }
-                        else if(IsBoxWithTitleExists("NSR"))
+                        else if (IsBoxWithTitleExists("NSR"))
                         {
                             NewBoxList.Insert(0, NewNSRBox());
                         }
-                        else if(IsBoxWithTitleExists("PVC"))
+                        else if (IsBoxWithTitleExists("PVC"))
                         {
                             NewBoxList.Insert(1, NewPVCBox());
                         }
@@ -188,14 +178,13 @@ namespace Timeline.ViewModel
 
         private static Box NewPVCBox()
         {
-            return new Box("PVC", "NSR") { Duration = 2, Bpm = 20 };
+            return new Box("PVC", "NSR") {Duration = 2, Bpm = 20};
         }
-
 
 
         private static PauseBox NewPauseBox()
         {
-            return new PauseBox { Duration = 2};
+            return new PauseBox {Duration = 2};
         }
     }
 }

@@ -5,7 +5,6 @@ using GalaSoft.MvvmLight.Threading;
 
 namespace Timeline
 {
-
     public partial class App
     {
         static App()
@@ -17,10 +16,10 @@ namespace Timeline
         [STAThread]
         public static void Main()
         {
-            SplashScreen splashScreen = new SplashScreen("resources/splash.png");
+            var splashScreen = new SplashScreen("resources/splash.png");
             splashScreen.Show(true);
             Thread.Sleep(3333);
-            
+
             var application = new App();
             application.InitializeComponent();
             application.Run();

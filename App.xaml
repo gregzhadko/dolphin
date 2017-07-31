@@ -14,7 +14,8 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Telerik.Windows.Themes.Office_Black;component/Themes/System.Windows.xaml" />
-                <ResourceDictionary Source="/Telerik.Windows.Themes.Office_Black;component/Themes/Telerik.Windows.Controls.xaml" />
+                <ResourceDictionary
+                    Source="/Telerik.Windows.Themes.Office_Black;component/Themes/Telerik.Windows.Controls.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" />
             <telerik:ColorToBrushConverter x:Key="ColorToBrushConverter" />
@@ -117,27 +118,31 @@
                                                 Grid.Column="0"
                                                 BorderBrush="Black"
                                                 BorderThickness="1">
-                                            <StackPanel Width="{Binding Content.Duration,
+                                            <StackPanel
+                                                Width="{Binding Content.Duration,
                                                                         Converter={StaticResource DurationToWidthConverter},
                                                                         RelativeSource={RelativeSource TemplatedParent}}"
-                                                        VerticalAlignment="Stretch"
-                                                        Background="{Binding Content.Color,
+                                                VerticalAlignment="Stretch"
+                                                Background="{Binding Content.Color,
                                                                              Converter={StaticResource ColorToBrushConverter},
                                                                              RelativeSource={RelativeSource TemplatedParent}}"
-                                                        Orientation="Vertical">
+                                                Orientation="Vertical">
                                                 <StackPanel.Resources>
                                                     <Style TargetType="TextBlock">
                                                         <Setter Property="FontWeight" Value="Bold" />
                                                         <Setter Property="FontSize" Value="11" />
                                                         <Setter Property="HorizontalAlignment" Value="Center" />
-                                                        <Setter Property="Background" Value="{Binding Content.Color, Converter={StaticResource ColorToBrushConverter}, RelativeSource={RelativeSource TemplatedParent}}" />
+                                                        <Setter Property="Background"
+                                                                Value="{Binding Content.Color, Converter={StaticResource ColorToBrushConverter}, RelativeSource={RelativeSource TemplatedParent}}" />
                                                     </Style>
                                                 </StackPanel.Resources>
-                                                <StackPanel Margin="2,10,2,0" Orientation="Horizontal" HorizontalAlignment="Center">
-                                                    <TextBlock Foreground="Black" Text="{Binding Content.Title, RelativeSource={RelativeSource TemplatedParent}, StringFormat={}{0}:}" />
+                                                <StackPanel Margin="2,10,2,0" Orientation="Horizontal"
+                                                            HorizontalAlignment="Center">
+                                                    <TextBlock Foreground="Black"
+                                                               Text="{Binding Content.Title, RelativeSource={RelativeSource TemplatedParent}, StringFormat={}{0}:}" />
                                                     <TextBlock Margin="5, 0, 0, 0"
-                                                              Foreground="Black"
-                                                              Text="{Binding Content.Bpm,
+                                                               Foreground="Black"
+                                                               Text="{Binding Content.Bpm,
                                                                              RelativeSource={RelativeSource TemplatedParent}}" />
                                                 </StackPanel>
                                                 <TextBlock Margin="2,0,2,10"
@@ -155,7 +160,8 @@
                                     <VisualStateGroup x:Name="EffectStates">
                                         <VisualState x:Name="None">
                                             <Storyboard>
-                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="NoneEffect" Storyboard.TargetProperty="Visibility">
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="NoneEffect"
+                                                                               Storyboard.TargetProperty="Visibility">
                                                     <DiscreteObjectKeyFrame KeyTime="0:0:0">
                                                         <DiscreteObjectKeyFrame.Value>
                                                             <Visibility>Visible</Visibility>
@@ -166,7 +172,8 @@
                                         </VisualState>
                                         <VisualState x:Name="Move">
                                             <Storyboard>
-                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MoveEffect" Storyboard.TargetProperty="Visibility">
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MoveEffect"
+                                                                               Storyboard.TargetProperty="Visibility">
                                                     <DiscreteObjectKeyFrame KeyTime="0:0:0">
                                                         <DiscreteObjectKeyFrame.Value>
                                                             <Visibility>Visible</Visibility>
@@ -177,7 +184,8 @@
                                         </VisualState>
                                         <VisualState x:Name="Copy">
                                             <Storyboard>
-                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CopyEffect" Storyboard.TargetProperty="Visibility">
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CopyEffect"
+                                                                               Storyboard.TargetProperty="Visibility">
                                                     <DiscreteObjectKeyFrame KeyTime="0:0:0">
                                                         <DiscreteObjectKeyFrame.Value>
                                                             <Visibility>Visible</Visibility>
@@ -188,7 +196,8 @@
                                         </VisualState>
                                         <VisualState x:Name="Link">
                                             <Storyboard>
-                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LinkEffect" Storyboard.TargetProperty="Visibility">
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LinkEffect"
+                                                                               Storyboard.TargetProperty="Visibility">
                                                     <DiscreteObjectKeyFrame KeyTime="0:0:0">
                                                         <DiscreteObjectKeyFrame.Value>
                                                             <Visibility>Visible</Visibility>
@@ -199,7 +208,8 @@
                                         </VisualState>
                                         <VisualState x:Name="Scroll">
                                             <Storyboard>
-                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ScrollEffect" Storyboard.TargetProperty="Visibility">
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ScrollEffect"
+                                                                               Storyboard.TargetProperty="Visibility">
                                                     <DiscreteObjectKeyFrame KeyTime="0:0:0">
                                                         <DiscreteObjectKeyFrame.Value>
                                                             <Visibility>Visible</Visibility>

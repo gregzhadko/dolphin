@@ -32,7 +32,8 @@
                             <Setter Property="FontWeight" Value="Bold" />
                             <Setter Property="FontSize" Value="12" />
                             <Setter Property="HorizontalAlignment" Value="Center" />
-                            <Setter Property="Background" Value="{Binding Color, Converter={StaticResource ColorToBrushConverter}}" />
+                            <Setter Property="Background"
+                                    Value="{Binding Color, Converter={StaticResource ColorToBrushConverter}}" />
                         </Style>
                     </StackPanel.Resources>
                     <StackPanel Margin="2,10,2,0"
@@ -70,7 +71,8 @@
                             <Setter Property="FontWeight" Value="Bold" />
                             <Setter Property="FontSize" Value="12" />
                             <Setter Property="HorizontalAlignment" Value="Center" />
-                            <Setter Property="Background" Value="{Binding Color, Converter={StaticResource ColorToBrushConverter}}" />
+                            <Setter Property="Background"
+                                    Value="{Binding Color, Converter={StaticResource ColorToBrushConverter}}" />
                         </Style>
                     </StackPanel.Resources>
                     <StackPanel Margin="2,10,2,0"
@@ -93,18 +95,20 @@
         </DataTemplate>
         <DataTemplate x:Key="TimelineBoxTemplate" DataType="{x:Type model:Box}">
             <Border BorderBrush="Black" BorderThickness="1">
-                <StackPanel Width="{Binding Duration,
+                <StackPanel
+                    Width="{Binding Duration,
                                             Converter={StaticResource DurationToWidthConverter}}"
-                            VerticalAlignment="Stretch"
-                            Background="{Binding Color,
+                    VerticalAlignment="Stretch"
+                    Background="{Binding Color,
                                                  Converter={StaticResource ColorToBrushConverter}}"
-                            Orientation="Vertical">
+                    Orientation="Vertical">
                     <StackPanel.Resources>
                         <Style TargetType="TextBlock">
                             <Setter Property="FontWeight" Value="Bold" />
                             <Setter Property="FontSize" Value="11" />
                             <Setter Property="HorizontalAlignment" Value="Center" />
-                            <Setter Property="Background" Value="{Binding Color, Converter={StaticResource ColorToBrushConverter}}" />
+                            <Setter Property="Background"
+                                    Value="{Binding Color, Converter={StaticResource ColorToBrushConverter}}" />
                         </Style>
                     </StackPanel.Resources>
                     <StackPanel Margin="2,10,2,0"
@@ -113,30 +117,34 @@
                         <TextBlock Text="{Binding Title, StringFormat={}{0}:}" />
                         <TextBlock Margin="5, 0, 0, 0" Text="{Binding Bpm}" />
                     </StackPanel>
-                    <TextBlock Margin="2,0,2,10" Text="{Binding Duration, Converter={StaticResource DurationToTextConverter}}" />
+                    <TextBlock Margin="2,0,2,10"
+                               Text="{Binding Duration, Converter={StaticResource DurationToTextConverter}}" />
                 </StackPanel>
             </Border>
         </DataTemplate>
         <DataTemplate x:Key="TimelinePauseBoxTemplate" DataType="{x:Type model:PauseBox}">
             <Border BorderBrush="Black" BorderThickness="1">
-                <StackPanel Width="{Binding Duration,
+                <StackPanel
+                    Width="{Binding Duration,
                                             Converter={StaticResource DurationToWidthConverter}}"
-                            VerticalAlignment="Stretch"
-                            Background="{Binding Color,
+                    VerticalAlignment="Stretch"
+                    Background="{Binding Color,
                                                  Converter={StaticResource ColorToBrushConverter}}"
-                            Orientation="Vertical">
+                    Orientation="Vertical">
                     <StackPanel.Resources>
                         <Style TargetType="TextBlock">
                             <Setter Property="FontWeight" Value="Bold" />
                             <Setter Property="FontSize" Value="11" />
                             <Setter Property="HorizontalAlignment" Value="Center" />
-                            <Setter Property="Background" Value="{Binding Color, Converter={StaticResource ColorToBrushConverter}}" />
+                            <Setter Property="Background"
+                                    Value="{Binding Color, Converter={StaticResource ColorToBrushConverter}}" />
                         </Style>
                     </StackPanel.Resources>
                     <TextBlock Margin="2,10,2,0"
                                FontSize="15"
                                Text="Pause" />
-                    <TextBlock Margin="2,0,2,10" Text="{Binding Duration, Converter={StaticResource DurationToTextConverter}}" />
+                    <TextBlock Margin="2,0,2,10"
+                               Text="{Binding Duration, Converter={StaticResource DurationToTextConverter}}" />
                 </StackPanel>
             </Border>
         </DataTemplate>
@@ -184,7 +192,8 @@
 
 
             <telerik:RadListBox.ItemTemplateSelector>
-                <converters:NewBoxTemplateSelector BoxTemplate="{StaticResource TimelineBoxTemplate}" PauseBoxTemplate="{StaticResource TimelinePauseBoxTemplate}" />
+                <converters:NewBoxTemplateSelector BoxTemplate="{StaticResource TimelineBoxTemplate}"
+                                                   PauseBoxTemplate="{StaticResource TimelinePauseBoxTemplate}" />
             </telerik:RadListBox.ItemTemplateSelector>
 
             <telerik:RadListBox.Resources>
@@ -233,7 +242,8 @@
             </telerik:RadListBox.DragVisualProvider>
 
             <telerik:RadListBox.ItemTemplateSelector>
-                <converters:NewBoxTemplateSelector BoxTemplate="{StaticResource NewBoxTemplate}" PauseBoxTemplate="{StaticResource NewPauseBoxTemplate}" />
+                <converters:NewBoxTemplateSelector BoxTemplate="{StaticResource NewBoxTemplate}"
+                                                   PauseBoxTemplate="{StaticResource NewPauseBoxTemplate}" />
             </telerik:RadListBox.ItemTemplateSelector>
 
             <telerik:RadListBox.ItemContainerStyle>

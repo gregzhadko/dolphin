@@ -9,8 +9,6 @@ namespace Timeline.Model
 {
     public class Box : BaseBox
     {
-        private static readonly Random Random = new Random();
-
         //each BPM corresponds to a certain color
         private static readonly List<Tuple<int, Color>> BoxColors = new List<Tuple<int, Color>>
         {
@@ -37,17 +35,16 @@ namespace Timeline.Model
             new Tuple<int, Color>(220, Colors.IndianRed),
             new Tuple<int, Color>(230, Colors.MediumVioletRed),
             new Tuple<int, Color>(240, Colors.OrangeRed),
-            new Tuple<int, Color>(250, Colors.Red),
+            new Tuple<int, Color>(250, Colors.Red)
         };
 
+        private double _beatFrequency;
 
+        private int _bpm;
 
         private Color _color;
 
         private int _duration;
-
-        private int _bpm;
-        private double _beatFrequency;
 
         static Box()
         {
@@ -67,38 +64,30 @@ namespace Timeline.Model
         }
 
         /// <summary>
-        /// List of possible BPMs
+        ///     List of possible BPMs
         /// </summary>
         public static ObservableCollection<int> PossibleValues { get; set; }
 
         /// <summary>
-        /// Selected BPM value
+        ///     Selected BPM value
         /// </summary>
         public int Bpm
         {
-            get { return _bpm; }
+            get => _bpm;
             set
             {
                 Set(ref _bpm, value);
-                BeatFrequency = 60.0/_bpm;
+                BeatFrequency = 60.0 / _bpm;
                 UpdateColor();
             }
         }
 
         /// <summary>
-        /// Select color from the colors list according to selected BPM
-        /// </summary>
-        private void UpdateColor()
-        {
-            Color = BoxColors.First(t => t.Item1 == Bpm).Item2;
-        }
-
-        /// <summary>
-        /// Duration of the box in seconds
+        ///     Duration of the box in seconds
         /// </summary>
         public override int Duration
         {
-            get { return _duration; }
+            get => _duration;
             set
             {
                 Set(ref _duration, value);
@@ -107,15 +96,55 @@ namespace Timeline.Model
         }
 
         /// <summary>
-        /// Current color of the box
+        ///     Current color of the box
         /// </summary>
         public override Color Color
         {
-            get { return _color; }
-            set { Set(ref _color, value); }
+            get => _color;
+            set => Set(ref _color, value);
         }
 
         public string FolderName { get; set; }
+
+        /// <summary>
+        ///     Index of last max value in the points list
+        /// </summary>
+        public int MaxValueLastIndex { get; private set; }
+
+        /// <summary>
+        ///     Index of first max value in the points list
+        /// </summary>
+        public int MaxValueFirstIndex { get; private set; }
+
+        /// <summary>
+        ///     Max value from the points list
+        /// </summary>
+        public int MaxValue { get; private set; }
+
+        /// <summary>
+        ///     Show the frequency for a beat.
+        /// </summary>
+        public double BeatFrequency
+        {
+            get => _beatFrequency;
+            private set
+            {
+                _beatFrequency = value;
+                UpdateBeatsNumberPerDuration();
+            }
+        }
+
+        public int BeatsNumberPerDuration { get; private set; }
+
+        public sealed override string Title { get; set; }
+
+        /// <summary>
+        ///     Select color from the colors list according to selected BPM
+        /// </summary>
+        private void UpdateColor()
+        {
+            Color = BoxColors.First(t => t.Item1 == Bpm).Item2;
+        }
 
         //grab entries from resource file according to BPM
         //Generate the entries needed for the export
@@ -129,17 +158,17 @@ namespace Timeline.Model
 
             Points = new List<string>();
 
-            var lines = File.ReadAllLines(fileName).Where(l => !String.IsNullOrWhiteSpace(l)).ToList();
+            var lines = File.ReadAllLines(fileName).Where(l => !string.IsNullOrWhiteSpace(l)).ToList();
 
-            for (int i = 0; i < BeatsNumberPerDuration; i++)
+            for (var i = 0; i < BeatsNumberPerDuration; i++)
             {
                 Points.AddRange(lines);
             }
         }
 
         /// <summary>
-        /// Calculate max point value, last index of max point value, first index of max point values.
-        /// It is necessary for pause boxes points generation 
+        ///     Calculate max point value, last index of max point value, first index of max point values.
+        ///     It is necessary for pause boxes points generation
         /// </summary>
         public void CalculateMaxValues()
         {
@@ -149,45 +178,13 @@ namespace Timeline.Model
             MaxValueLastIndex = points.FindLastIndex(i => i == MaxValue);
         }
 
-        /// <summary>
-        /// Index of last max value in the points list
-        /// </summary>
-        public int MaxValueLastIndex { get; private set; }
 
         /// <summary>
-        /// Index of first max value in the points list
-        /// </summary>
-        public int MaxValueFirstIndex { get; private set; }
-
-        /// <summary>
-        /// Max value from the points list
-        /// </summary>
-        public int MaxValue { get; private set; }
-
-        /// <summary>
-        /// Show the frequency for a beat.
-        /// </summary>
-        public double BeatFrequency
-        {
-            get { return _beatFrequency; }
-            private set
-            {
-                _beatFrequency = value;
-                UpdateBeatsNumberPerDuration();
-            }
-        }
-
-
-        /// <summary>
-        /// Calculate Beats number per set duration
+        ///     Calculate Beats number per set duration
         /// </summary>
         private void UpdateBeatsNumberPerDuration()
         {
-            BeatsNumberPerDuration = (int)Math.Ceiling(Duration/BeatFrequency);
+            BeatsNumberPerDuration = (int) Math.Ceiling(Duration / BeatFrequency);
         }
-
-        public int BeatsNumberPerDuration { get; private set; }
-
-        public override string Title { get; set; }
     }
 }

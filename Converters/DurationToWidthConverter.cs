@@ -10,12 +10,10 @@ namespace Timeline.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var duration = (int) value;
-            if (duration > 10)
-            {
+            var duration = (int?) value;
+            if (duration != null && duration > 10)
                 duration = 10;
-            }
-            return duration*35;
+            return duration * 35;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
